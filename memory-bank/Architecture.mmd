@@ -1,0 +1,10 @@
+flowchart LR
+  U[User/Client] --> API[Controller/API]
+  API --> SVC[Service]
+  SVC --> REPO[Repository]
+  REPO --> DB[(MySQL)]
+
+  API --> AUTH[Auth: JWT/RBAC(占位)]
+  SVC --> AUDIT[Audit Log(占位)]
+  SVC --> AI[AI Assistant: RAG(占位)]
+  SVC --> CACHE[(Redis)(占位)]
