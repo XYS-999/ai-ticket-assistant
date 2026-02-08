@@ -27,13 +27,46 @@
 - POST /api/tickets/{id}/comments  添加评论
 - POST /api/tickets/{id}/transition 状态流转（占位）
 
+## 4.5 授权模型（资源权限：Owner/Assignee/Admin）
+
+主体定义：
+- Owner：工单创建人
+- Assignee：当前处理人（可为空，未分配）
+- Admin：管理员（拥有全局权限）
+
+规则（v0）：
+- 查看工单：
+  - Owner 可查看自己的工单
+  - Assignee 可查看分配给自己的工单
+  - Admin 可查看全部工单
+- 评论/补充信息：
+  - Owner/Assignee/Admin 均可对可见工单发表评论
+- 指派处理人（assign）：
+  - Admin 可指派/改派 Assignee
+- 状态流转（transition）：
+  - Assignee/Admin 可流转工单状态
+  - Owner 可执行“确认关闭”（从待确认到关闭，细化在状态机章节）
+- 权限校验落点：
+  - 所有写操作在 Service 层统一做资源权限校验
+  - 所有关键操作写入审计日志（谁对哪条 ticket 做了什么）
+
+
 ## 5. 数据库表草案（先列表名，后续补字段）
 - user
 - role
 - permission
 - user_role
 - role_permission
-- ticket
+- ticket（最小字段占位）
+  - id
+  - title
+  - description
+  - status
+  - owner_user_id
+  - assignee_user_id（nullable）
+  - created_at
+  - updated_at
+
 - ticket_comment
 - audit_log
 
