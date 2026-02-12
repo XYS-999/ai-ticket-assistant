@@ -6,6 +6,7 @@
 - Redis（占位）
 - Docker Compose（占位）
 - OpenAPI/Swagger（占位）
+- Vue 3 + TypeScript + Element Plus + Axios + Vue Router
 
 ## 2. 分层与目录约定（必须遵守）
 - Controller：只做参数接收与校验，不写业务逻辑
