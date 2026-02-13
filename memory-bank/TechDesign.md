@@ -240,3 +240,10 @@ Admin 判定（v0）：
 - 事务：create/assign/transition 与 audit_log 同事务（同步写库）
 - 脱敏（v0 最小集合）：password/token 不写日志；疑似手机号/身份证字段打码（占位规则）
 - 工程结构：单体分层（controller/service/repository），业务按模块分包（auth/user/ticket/audit/infra）
+
+## PR-001 已落地（backend skeleton）
+- Backend：Spring Boot Web 最小骨架已可运行（Java 21 + Maven Wrapper）
+- API：提供最小健康检查端点 `/api/health`（用于本地验证与后续部署健康探针基础）
+- Tests：已具备最小测试链路（由 `mvn test` 驱动）
+- CI：已具备最小持续集成门禁（GitHub Actions 跑后端测试）
+- 运行/验收细节：详见 `memory-bank/CHECKLIST_QualityGate.md`

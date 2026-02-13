@@ -27,3 +27,13 @@
 - Git 忽略目录（.gitignore）：对 untracked 的 refs/ 用 `refs/` 忽略规则即可｜Verified：`git status`｜Result：PASS
 - Node.js + npm：已安装并确认版本｜Verified：`node -v` / `npm -v`｜Result：PASS
 - VS Code 提交推送（中文界面）：可用“源代码管理→暂存→提交→同步更改”完成推送｜Verified：一次提交并同步更改（手动）｜Result：PASS
+
+## 2026-02-13 （周五）
+- PR-001：backend Spring Boot 骨架 + /api/health + CI（GitHub Actions）
+- Toolchain：安装/配置 Java 21（Temurin），补齐 JAVA_HOME 与 PATH（详见 memory-bank/ENV.md）
+- Verified：
+  - `cd backend` # 用途：进入后端工程目录；获取信息：确保后续 mvnw/pom 解析在正确目录
+  - `mvnw.cmd -B test` # 用途：执行到 test 阶段并运行单元测试；获取信息：BUILD SUCCESS/测试通过
+  - `mvnw.cmd spring-boot:run` # 用途：启动 Spring Boot 应用；获取信息：Started AiTicketAssistantApplication... 日志
+  - `curl http://localhost:8080/api/health` # 用途：验证健康检查接口；获取信息：应返回 {"status":"UP"}
+- Result：PASS

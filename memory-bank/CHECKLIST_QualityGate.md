@@ -98,3 +98,14 @@
 - [ ] 允许合并（以上关键项 PASS 或合理 N/A）
 - [ ] 不允许合并（列出阻塞项）：
   - ...
+
+## PR-001 Quality Gate（backend skeleton）
+- Local Build/Test
+  - `cd backend` # 用途：进入后端工程目录；获取信息：确保后续 mvnw/pom 解析在正确目录
+  - `mvnw.cmd -B test` # 用途：执行到 test 阶段并运行单元测试；获取信息：BUILD SUCCESS/测试通过
+- Local Run
+  - `mvnw.cmd spring-boot:run` # 用途：启动 Spring Boot 应用；获取信息：Started AiTicketAssistantApplication... 日志
+  - `curl http://localhost:8080/api/health` # 用途：验证健康检查接口；获取信息：应返回 {"status":"UP"}
+- CI
+  - GitHub Actions must be green: `.github/workflows/ci.yml` runs `cd backend && ./mvnw -B test`
+

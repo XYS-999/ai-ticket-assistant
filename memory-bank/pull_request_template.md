@@ -35,3 +35,12 @@
 ## Quality Gate（门禁自检）
 > 合并前必须自检：memory-bank/CHECKLIST_QualityGate.md
 - Result：PASS / FAIL / N/A（说明：）
+
+## Quality Gate (required)
+- [ ] I verified changes locally using the project Quality Gate checklist: `memory-bank/CHECKLIST_QualityGate.md`
+- [ ] CI is green (GitHub Actions)
+
+## Docs sync (if applicable)
+- [ ] Updated `memory-bank/DAILY_LOG.md` (today's record)
+- [ ] Updated `memory-bank/ENV.md` (toolchain changes)
+- [ ] Updated `memory-bank/SOP_Workflow.md` / `memory-bank/TechDesign.md` when workflow/design changed

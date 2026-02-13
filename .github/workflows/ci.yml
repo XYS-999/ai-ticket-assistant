@@ -1,27 +1,31 @@
-name: CI
+name: CI  # 工作流名称：在 GitHub Actions 界面显示为 “CI”
 
-on:
-  push:
+on:  # 触发条件：哪些事件发生时运行这个工作流
+  push:  # 当有人 push（推送提交）到远程仓库时触发
     branches:
-      - "**"
-  pull_request:
+      - "**"  # 匹配所有分支：任意分支 push 都会触发（可后续收敛为 main 等）
+  pull_request:  # 当创建/更新 PR（Pull Request，拉取请求）时触发
 
-jobs:
-  backend-test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+jobs:  # 工作流包含的任务集合（可以有多个 job 并行/串行）
+  backend-test:  # job 的 ID（内部标识），你可以自定义
+    runs-on: ubuntu-latest  # 运行环境：GitHub 提供的 Ubuntu 最新镜像虚拟机
 
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: "21"
-          cache: maven
+    steps:  # job 的执行步骤（按顺序执行）
+      - name: Checkout  # 步骤名称：拉取代码
+        uses: actions/checkout@v4  # 使用官方 action：把仓库代码检出到虚拟机工作目录
 
-      - name: Run backend tests
-        run: |
-          chmod +x backend/mvnw
-          cd backend
-          ./mvnw -B test
+      - name: Set up JDK 21  # 步骤名称：安装 Java 21
+        uses: actions/setup-java@v4  # 使用官方 action：安装并配置 Java
+        with:  # 该 action 的参数
+          distribution: temurin  # JDK 发行版：Temurin（Eclipse Adoptium 的 OpenJDK 构建）
+          java-version: "21"  # Java 版本：21（与你本地与 pom.xml 的 java.version 对齐）
+          cache: maven  # 开启 Maven 依赖缓存：加速后续构建（缓存 ~/.m2/repository）
+
+      - name: Run backend tests  # 步骤名称：运行后端测试
+        run: |  # run 表示执行 shell 命令；| 表示多行脚本
+          chmod +x backend/mvnw  
+          cd backend  
+          ./mvnw -B test  
+        # Linux 需要给 mvnw 增加可执行权限（Windows 不需要）
+        # 进入后端子目录（因为 pom.xml 在 backend/ 下）
+        # 使用 Maven Wrapper 跑测试；-B=Batch mode（批处理模式，CI 更稳定日志更干净）

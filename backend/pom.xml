@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- XML = eXtensible Markup Language（可扩展标记语言） -->
+<!-- 这行是 XML 声明：version 是 XML 规范版本，encoding 是文件编码 -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- POM = Project Object Model（项目对象模型）
+         这个文件“属于 Maven”，不是 Spring Boot 专属文件。
+         Spring Boot 是借助 Maven 的 POM 机制来管理依赖和构建。 -->
+
     <modelVersion>4.0.0</modelVersion>
+    <!-- modelVersion 是 POM 模型版本，不是 Maven 软件版本 -->
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -10,31 +18,52 @@
         <version>3.5.0</version>
         <relativePath/>
     </parent>
+    <!-- parent 的作用：
+         1) 统一依赖版本（类似 BOM: Bill Of Materials，依赖版本清单）
+         2) 提供常用插件默认配置
+         3) 降低手动写 version 的数量
+         relativePath 为空：不从本地父目录找父 POM，直接走 Maven 仓库解析 -->
 
     <groupId>com.xyss</groupId>
     <artifactId>ai-ticket-assistant</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ai-ticket-assistant</name>
     <description>AI Ticket Assistant backend</description>
+    <!-- GAV = GroupId + ArtifactId + Version（Maven 坐标三元组）
+         groupId：组织/命名空间（避免重名）
+         artifactId：构件名（模块名）
+         version：版本号，SNAPSHOT 表示开发中版本 -->
 
     <properties>
         <java.version>21</java.version>
     </properties>
+    <!-- properties 用于集中管理参数
+         JDK = Java Development Kit（Java 开发工具包）
+         这里固定 Java 21，保证本地与 CI 一致 -->
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!-- dependency 关键字详解：
+             groupId + artifactId + version => 唯一定位一个依赖
+             这里 version 可省略，因为 parent 已托管版本
+             starter-web 提供 REST API 需要的 Spring MVC、嵌入式 Tomcat、JSON 支持 -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
+        <!-- validation 提供参数校验能力（如 @NotNull、@Size） -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- scope = 依赖作用域
+             test 表示仅测试阶段可用，不进入生产运行时 -->
     </dependencies>
 
     <build>
@@ -45,4 +74,12 @@
             </plugin>
         </plugins>
     </build>
+    <!-- build/plugins：定义构建行为
+         spring-boot-maven-plugin 负责 Spring Boot 打包流程（如可执行 jar） -->
+
+    <!-- 常见追问：spring-boot-starter-parent vs spring-boot-starter
+         二者不是替代关系：
+         - starter-parent：父 POM，负责“版本与构建约定”
+         - starter(-web/-test...)：功能依赖集合，负责“能力引入”
+         只引入 starter 不等于拥有 parent 的版本管理与默认构建配置 -->
 </project>

@@ -103,3 +103,16 @@
 6. API（Application Programming Interface，应用程序接口）
 7. CI（Continuous Integration，持续集成）
 8. Logs（日志）、Metrics（指标）、Tracing（追踪）
+
+## PR 流程补充（以 PR-001 为样例）
+- 定位：CI/CD（Continuous Integration/Continuous Delivery/Deployment）是成熟的工程化流程；本项目先落地 CI 作为质量门禁
+- 固定步骤（每个 PR 都按这个走）：
+  1) 只读摸底（先看目录/关键文件/现有约束），输出改动计划与验收点
+  2) 实现改动（限制改动范围，避免无关文件漂移）
+  3) 本地验收（按 Quality Gate 清单逐项验证）
+  4) 更新文档（ENV/DAILY_LOG/SOP 等按需同步）
+  5) 提交与推送（PR/合并前 CI 必须为绿）
+- 验收标准来源：详见 `memory-bank/CHECKLIST_QualityGate.md`
+- 环境信息来源：详见 `memory-bank/ENV.md`
+- 当日结果记录：详见 `memory-bank/DAILY_LOG.md`
+
