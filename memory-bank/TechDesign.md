@@ -247,3 +247,5 @@ Admin 判定（v0）：
 - Tests：已具备最小测试链路（由 `mvn test` 驱动）
 - CI：已具备最小持续集成门禁（GitHub Actions 跑后端测试）
 - 运行/验收细节：详见 `memory-bank/CHECKLIST_QualityGate.md`
+## Changelog（每个 PR 追加一条，只写事实）
+- 2026-02-13 PR-001: backend skeleton + /api/health + CI; Verify: QualityGate PASS
