@@ -249,3 +249,4 @@ Admin 判定（v0）：
 - 运行/验收细节：详见 `memory-bank/CHECKLIST_QualityGate.md`
 ## Changelog（每个 PR 追加一条，只写事实）
 - 2026-02-13 PR-001: backend skeleton + /api/health + CI; Verify: QualityGate PASS
+- 2026-02-14 PR-002: Done=add `spring-boot-starter-actuator` and expose only `health,info` in `application.yml`; Verify=`cd backend && .\mvnw.cmd -B test` and `powershell -Command "Invoke-RestMethod http://localhost:8080/actuator/health | ConvertTo-Json -Compress"`; Result=test PASS, response includes `{"status":"UP"}`.

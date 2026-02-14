@@ -1,2 +1,19 @@
+# server: Spring Boot 应用自身的 Web 服务配置根节点（不包含 Actuator 独立端口配置）。
 server:
+  # port: 应用监听端口；启动后业务接口与 Actuator（未分离端口时）都走这个端口。
+  # 这里是 8080，因此访问地址基准是 http://localhost:8080
   port: 8080
+
+# management: Spring Boot Actuator 管理与监控相关配置根节点。
+management:
+  # endpoints: 统一管理所有 Actuator 端点（如 health/info/metrics/env/beans 等）。
+  endpoints:
+    # web: 针对 HTTP 暴露方式的端点配置（即 /actuator/* 路径）。
+    web:
+      # exposure: 控制哪些 Actuator 端点可以通过 HTTP 对外访问。
+      exposure:
+        # include: 白名单机制；只暴露这里列出的端点，未列出的端点默认不对外开放。
+        # health: 健康检查端点 -> /actuator/health（用于存活探针/就绪探针/人工巡检）。
+        # info: 基本信息端点 -> /actuator/info（当前若未额外配置 info 内容，可能返回空对象）。
+        # 当前最小暴露策略：health,info；不暴露 env/beans 等敏感端点。
+        include: health,info
